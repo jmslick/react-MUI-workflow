@@ -1,5 +1,7 @@
 package com.gdeb.ripout.routing;
 
+import com.gdeb.ripout.workflow.Workflow;
+
 /**
  * @author admin
  *
@@ -10,7 +12,11 @@ public class RoutingOriginator extends Routing {
 		super(0, "ORIGINATOR", "EBROOriginator");
 	}
 
-	public Routing calculate() {
-		return new RoutingWriter();
+	public Routing _calculate() {
+		return new RoutingRipoutWriter();
+	}
+
+	public String calculate() {
+		return Workflow.RIPOUT_WRITER;
 	}
 }

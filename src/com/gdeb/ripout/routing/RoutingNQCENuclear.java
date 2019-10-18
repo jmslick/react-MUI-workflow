@@ -1,5 +1,7 @@
 package com.gdeb.ripout.routing;
 
+import com.gdeb.ripout.workflow.Workflow;
+
 /**
  * @author admin
  *
@@ -10,12 +12,22 @@ public class RoutingNQCENuclear extends Routing {
 		super(40, "NQCE", "EBRONuclearQualityControl");
 	}
 
-	public Routing calculate() {
+	public Routing calculateRouting() {
 		Double d = Math.random();
 		System.out.println(d);
 		if (d > 0.5)
 			return new RoutingOriginator();
 		else
-			return new RoutingEngineeringInitalReview();
+			return new RoutingEngineeringInitialReview();
 	}
+
+	public String calculate() {
+		Double d = Math.random();
+		System.out.println(d);
+		if (d > 0.5)
+			return Workflow.RIPOUT_UNDEFINED;
+		else
+			return Workflow.ENGINEERING_INITIAL_REVIEW;
+	}
+
 }

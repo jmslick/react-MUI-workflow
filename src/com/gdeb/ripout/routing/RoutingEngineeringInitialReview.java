@@ -4,9 +4,9 @@ package com.gdeb.ripout.routing;
  * @author admin
  *
  */
-public class RoutingEngineeringInitalReview extends Routing {
+public class RoutingEngineeringInitialReview extends Routing {
 
-	public RoutingEngineeringInitalReview() {
+	public RoutingEngineeringInitialReview() {
 		super(60, "ENGINITREVIEW", "EBROEnhancedROEngineer");
 	}
 

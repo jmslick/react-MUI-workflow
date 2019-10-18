@@ -7,7 +7,7 @@ package com.gdeb.ripout.routing;
 public class RoutingQAIPiping extends Routing {
 
 	public RoutingQAIPiping() {
-		super(10, "QAIPIPING", "EBROQAI");
+		super(10, "QAI PIPING", "EBROQAI");
 	}
 
 	/*

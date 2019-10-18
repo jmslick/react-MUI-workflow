@@ -6,6 +6,7 @@ public class Ripout {
 	// protected static final Logger log = LogManager.getLogger(Ripout.class);
 
 	private Routing routing;
+	private String openRouting;
 
 	private int xref;
 	private int xref_seq;
@@ -22,8 +23,10 @@ public class Ripout {
 		this.status = status;
 		this.badge = badge;
 		this.userid = userid;
+		this.openRouting = Workflow.RIPOUT_ORIGINATOR;
 
-		System.out.println("Ripout originated: " + toString());
+		System.out.println("Ripout origin: " + toString());
+		System.out.println("----");
 	}
 
 	public Routing getRouting() {
@@ -33,6 +36,16 @@ public class Ripout {
 	public void setRouting(Routing routing) {
 		this.routing = routing;
 		System.out.println("Open: " + routing.toString());
+	}
+
+	public String getOpenRouting() {
+		return openRouting;
+	}
+
+	public void setOpenRouting(String openRouting) {
+		this.openRouting = openRouting;
+		System.out.println("Open: " + openRouting);
+		System.out.println("----");
 	}
 
 	public int getXref() {
@@ -85,7 +98,8 @@ public class Ripout {
 
 	@Override
 	public String toString() {
-		return "[routing=" + routing + ", xref=" + xref + ", xref_seq=" + xref_seq + ", badge=" + badge + ", userid="
-				+ userid + ", status=" + status + ", nuclear=" + nuclear + "]";
+		return "Ripout [xref=" + xref + ", xref_seq=" + xref_seq + ", nuclear=" + nuclear + ", status=" + status
+				+ ", routing=" + routing + ", openRouting=" + openRouting + "]";
 	}
+
 }
