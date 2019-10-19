@@ -12,10 +12,6 @@ public class RoutingRipoutWriter extends Routing {
 		super(10, "WRITER", "EBRORipoutWriter");
 	}
 
-	public Routing calculateRouting() {
-		return new RoutingLeadTrade();
-	}
-
 	public String calculate() {
 		return Workflow.LEAD_TRADE;
 	}

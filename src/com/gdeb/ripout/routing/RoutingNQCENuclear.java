@@ -12,15 +12,6 @@ public class RoutingNQCENuclear extends Routing {
 		super(40, "NQCE", "EBRONuclearQualityControl");
 	}
 
-	public Routing calculateRouting() {
-		Double d = Math.random();
-		System.out.println(d);
-		if (d > 0.5)
-			return new RoutingOriginator();
-		else
-			return new RoutingEngineeringInitialReview();
-	}
-
 	public String calculate() {
 		Double d = Math.random();
 		System.out.println(d);

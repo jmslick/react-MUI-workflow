@@ -12,10 +12,6 @@ public class RoutingLeadTrade extends Routing {
 		super(20, "LEADTRADE", "EBROLeadTrade");
 	}
 
-	public Routing calculateRouting() {
-		return new RoutingShipMgrApproval();
-	}
-
 	public String calculate() {
 		return Workflow.SHIP_MGR_APPROVAL;
 	}

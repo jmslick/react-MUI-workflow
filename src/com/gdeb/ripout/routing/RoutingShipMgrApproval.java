@@ -12,10 +12,6 @@ public class RoutingShipMgrApproval extends Routing {
 		super(30, "SHIP MGR APPROVAL", "EBROShipManager");
 	}
 
-	public Routing calculateRouting() {
-		return new RoutingQAEReview();
-	}
-
 	public String calculate() {
 		return Workflow.QAE_REVIEW;
 	}

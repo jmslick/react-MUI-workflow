@@ -12,10 +12,6 @@ public class RoutingOriginator extends Routing {
 		super(0, "ORIGINATOR", "EBROOriginator");
 	}
 
-	public Routing _calculate() {
-		return new RoutingRipoutWriter();
-	}
-
 	public String calculate() {
 		return Workflow.RIPOUT_WRITER;
 	}

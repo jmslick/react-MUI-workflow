@@ -16,10 +16,6 @@ public abstract class Routing {
 		this.role = role;
 	}
 
-	public Routing calculateRouting() {
-		throw new UnsupportedOperationException();
-	}
-
 	public String calculate() {
 		throw new UnsupportedOperationException();
 	}

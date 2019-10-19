@@ -6,7 +6,6 @@ import com.gdeb.ripout.workflow.Workflow;
 public class ripoutTest {
 	public static void main(String[] args) {
 		Ripout ripout = new Ripout(1, 1, true, "DRFT", 012345, "siczpak");
-		// ripout.setRouting(new RoutingOriginator());
 
 		Workflow workflow = new Workflow(ripout);
 		workflow.signRoutingStep(ripout);
@@ -14,10 +13,5 @@ public class ripoutTest {
 		workflow.signRoutingStep(ripout);
 		workflow.signRoutingStep(ripout);
 		workflow.signRoutingStep(ripout);
-
-		/*
-		 * workflow.progress(); workflow.progress(); workflow.progress();
-		 * workflow.progress(); workflow.progress();
-		 */
 	}
 }

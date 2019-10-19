@@ -1,7 +1,6 @@
 package com.gdeb.ripout.workflow;
 
 import java.util.Map;
-import java.util.TreeMap;
 
 import com.gdeb.ripout.routing.Routing;
 
@@ -26,9 +25,7 @@ public class Workflow {
 
 	public Workflow(Ripout ripout) {
 		super();
-		// populateRoutings();
 		this.ripout = ripout;
-		// this.routing = ripout.getRouting();
 	}
 
 	public void signRoutingStep(Ripout ripout) {
@@ -37,15 +34,12 @@ public class Workflow {
 	}
 
 	public void progress() {
-		// routing = ripout.getRouting();
-		// ripout.setRouting(routing.calculate());
 		String nextStep = routing.calculate();
 		ripout.setOpenRouting(nextStep);
 	}
 
 	private void loadRoutingClass(String routingName) {
 		final String pkg = "com.gdeb.ripout.routing.";
-		// String className = routings.get(routingName);
 		try {
 			Class clazz = Class.forName(pkg + routingName);
 			routing = (Routing) clazz.newInstance();
@@ -54,17 +48,5 @@ public class Workflow {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	private void populateRoutings() {
-		routings = new TreeMap<String, String>();
-		routings.put("Engineering Initial Review", "RoutingEngineeringInitialReview");
-		routings.put("Lead Trade", "RoutingLeadTrade");
-		routings.put("NQCE Nuclear", "RoutingNQCENuclear");
-		routings.put("QAI Review", "RoutingQAIReview");
-		routings.put("QAI Piping", "RoutingQAIPiping");
-		routings.put("Ship Mgr Approval", "RoutingShipMgrApproval");
-		routings.put("Ripout Writer", "RoutingRipoutWriter");
-		routings.put("Test Dept Test Controls", "RoutingTestDeptTestControls");
 	}
 }
