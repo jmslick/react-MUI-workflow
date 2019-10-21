@@ -11,6 +11,6 @@ public class ShipsManagementApproval extends Routing {
 	}
 
 	public String calculate() {
-		return ROUTING_QAE_SPECIAL_EMPHASIS_REVIEW;
+		return ROUTING_TEST_DEPT_TEST_CONTROLS;
 	}
 }

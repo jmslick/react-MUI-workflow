@@ -18,6 +18,7 @@ public class Workflow {
 	public static void signWorkflowStep(Ripout ripout) {
 		System.out.println("sign: " + ripout.toString());
 		loadRoutingClass(ripout.getRouting());
+		ripout.setStatus(routing.getStatus());
 		ripout.setRouting(routing.calculate());
 	}
 

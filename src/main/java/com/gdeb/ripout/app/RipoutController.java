@@ -39,11 +39,13 @@ class RipoutController {
 		return repository.findById(id).orElseThrow(() -> new RipoutNotFoundException(id));
 	}
 
+	// progress and return the progressed ripout record
 	@PutMapping("/ripout/progress/{id}")
-	void progress(@PathVariable Long id) {
+	Ripout progress(@PathVariable Long id) {
 		Ripout ripout = repository.findById(id).orElseThrow(() -> new RipoutNotFoundException(id));
 		Workflow.signWorkflowStep(ripout);
 		repository.save(ripout);
+		return repository.findById(id).orElseThrow(() -> new RipoutNotFoundException(id));
 	}
 
 	/*

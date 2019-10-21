@@ -48,6 +48,10 @@ public abstract class Routing {
 		throw new UnsupportedOperationException("Undefined routing class");
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
 	@Override
 	public String toString() {
 		return "Routing [id=" + id + ", routingClass=" + routingClass + ", role=" + role + "]";
