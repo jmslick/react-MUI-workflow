@@ -11,6 +11,8 @@ public class Originator extends Routing {
 	}
 
 	public String calculate() {
-		return ROUTING_RIPOUT_WRITER;
+		String next = ROUTING_RIPOUT_WRITER;
+		System.out.println("Originator routing to: " + next);
+		return next;
 	}
 }
