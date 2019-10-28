@@ -17,8 +17,7 @@ public class Workflow {
 
 	public static void signWorkflowStep(Ripout ripout) {
 		System.out.println("Sign off: " + ripout.toString());
-		loadRoutingClass(ripout.getRouting());
-		System.out.println("Loaded next routing object: " + routing.toString());
+		loadRoutingClass(ripout.getRouting());		
 		ripout.setStatus(routing.getStatus());
 		ripout.setRouting(routing.calculate());
 	}
@@ -28,6 +27,7 @@ public class Workflow {
 		try {
 			Class clazz = Class.forName(pkg + routingName);
 			routing = (Routing) clazz.newInstance();			
+			System.out.println("Loaded next routing object: " + routing.toString());
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
