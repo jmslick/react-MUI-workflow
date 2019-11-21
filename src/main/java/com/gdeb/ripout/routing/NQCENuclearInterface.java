@@ -13,7 +13,7 @@ public class NQCENuclearInterface extends Routing {
 	public String calculate() {
 		Double d = Math.random();
 		if (d > 0.5)
-			return ROUTING_QAI_PIPING;
+			return ROUTING_QAI_PIPING_REVIEW;
 		else
 			return ROUTING_ENGINEERING_INITIAL_REVIEW;
 	}

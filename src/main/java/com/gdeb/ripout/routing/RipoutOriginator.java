@@ -4,9 +4,9 @@ package main.java.com.gdeb.ripout.routing;
  * @author jslick
  *
  */
-public class Originator extends Routing {
+public class RipoutOriginator extends Routing {
 
-	public Originator() {
+	public RipoutOriginator() {
 		super(0, null, "Originator", "EBROOriginator");
 	}
 

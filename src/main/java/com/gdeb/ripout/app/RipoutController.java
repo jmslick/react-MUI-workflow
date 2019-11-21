@@ -11,15 +11,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import main.java.com.gdeb.ripout.model.Ripout;
+import main.java.com.gdeb.ripout.model.Task;
 import main.java.com.gdeb.ripout.workflow.Workflow;
 
 @RestController
 class RipoutController {
 
 	private final RipoutRepository repository;
+	private final TaskRepo taskRepository;
 
-	RipoutController(RipoutRepository repository) {
+	RipoutController(RipoutRepository repository, TaskRepo taskRepository) {
 		this.repository = repository;
+		this.taskRepository = taskRepository;
 	}
 
 	// Aggregate root
@@ -63,4 +66,17 @@ class RipoutController {
 	void deleteRipout(@PathVariable Long id) {
 		repository.deleteById(id);
 	}
+
+	// Tasks
+	@GetMapping("/ripout/tasks")
+	List<Task> findAllTasks() {
+		return taskRepository.findAll();
+	}
+
+	// Task
+	@GetMapping("/ripout/task/{id}")
+	Task findTasks(@PathVariable Long id) {
+		return taskRepository.findById(id).orElseThrow(() -> new RipoutNotFoundException(id));
+	}
+
 }

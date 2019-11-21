@@ -27,7 +27,7 @@ public class QAESpecialEmphasisReview extends Routing {
 			if (Math.random() > 0.5) {
 				System.out.println("\tQAI IS required");
 				// route to qai piping for now...
-				return ROUTING_QAI_PIPING;
+				return ROUTING_QAI_PIPING_REVIEW;
 			} else {
 				System.out.println("\tQAI NOT required");
 				System.out.println("\tStatus = STEC");

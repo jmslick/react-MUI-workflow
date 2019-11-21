@@ -11,6 +11,6 @@ public class EngineeringsSupervisorReview extends Routing {
 	}
 
 	public String calculate() {
-		return EngineeringsSupervisorReview.ROUTING_QAI_PIPING;
+		return ROUTING_QAI_MECH_REVIEW;
 	}
 }
