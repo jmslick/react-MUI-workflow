@@ -21,6 +21,8 @@ class LoadDatabase {
 					.save(new Ripout(1, Routing.ROUTING_RIPOUT_WRITER, true, Routing.STATUS_DRFT, 012345, "siczpak")));
 			log.info("Preloading " + repository
 					.save(new Ripout(1, Routing.ROUTING_RIPOUT_WRITER, true, Routing.STATUS_DRFT, 678901, "kincaid")));
+			log.info("Preloading " + repository
+					.save(new Ripout(1, Routing.RIPOUT_ROUTING_ORIGINATOR, true, Routing.STATUS_DRFT, 234567, "rokhead")));
 		};
 	}
 }

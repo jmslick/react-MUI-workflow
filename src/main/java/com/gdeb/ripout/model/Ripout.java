@@ -57,10 +57,10 @@ public class Ripout {
 		return routing;
 	}
 
-	public void setRouting(String routing) {
-		System.out.println("Current routing: " + routing);
-		this.routing = routing;
-		System.out.println("New Routing: " + routing);
+	public void setRouting(String routingNext) {
+		System.out.println("Routing current: " + this.routing);
+		this.routing = routingNext;
+		System.out.println("Routing next: " + routingNext);
 		System.out.println("----");
 	}
 

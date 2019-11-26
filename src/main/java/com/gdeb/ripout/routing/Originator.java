@@ -7,10 +7,12 @@ package main.java.com.gdeb.ripout.routing;
 public class Originator extends Routing {
 
 	public Originator() {
-		super(0, null, "Originator", "EBROOriginator");
+		super(0, null, RIPOUT_ROUTING_ORIGINATOR, "EBROOriginator");
 	}
 
 	public String calculate() {
-		return ROUTING_RIPOUT_WRITER;
+		String next = ROUTING_RIPOUT_WRITER;
+		System.out.println("Originator routing to: " + next);
+		return next;
 	}
 }

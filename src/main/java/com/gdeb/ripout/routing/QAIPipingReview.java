@@ -11,6 +11,7 @@ public class QAIPipingReview extends Routing {
 	}
 
 	public String calculate() {
+		System.out.println("QAIPipingReview next routing: " + ROUTING_QAE_SPECIAL_EMPHASIS_REVIEW);
 		return ROUTING_QAE_SPECIAL_EMPHASIS_REVIEW;
 	}
 }
