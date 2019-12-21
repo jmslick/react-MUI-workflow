@@ -7,7 +7,7 @@ package main.java.com.gdeb.ripout.routing;
 public class LeadTrade extends Routing {
 
 	public LeadTrade() {
-		super(20, STATUS_DRFT, "LeadTrade", "EBROLeadTrade");
+		super(20, STATUS_DRFT, ROUTING_LEAD_TRADE, "EBROLeadTrade");
 	}
 
 	public String calculate() {

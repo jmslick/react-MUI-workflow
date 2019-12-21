@@ -1,6 +1,6 @@
 package main.java.com.gdeb.ripout.model;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,13 +9,10 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import lombok.Data;
-
 /**
  * @author admin
  *
  */
-@Data
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
 public class Task {
@@ -26,20 +23,13 @@ public class Task {
 
 	private String status;
 	private String role;
+	private long routingNumber;
 	private String routingCurrent;
 	private String routingNext;
 	private String routingClass;
 
 	@OneToMany(mappedBy = "task")
-	private List<TaskRouting> taskRoutings;
-
-	public List<TaskRouting> getTaskRoutings() {
-		return taskRoutings;
-	}
-
-	public void setTaskRoutings(List<TaskRouting> taskRoutings) {
-		this.taskRoutings = taskRoutings;
-	}
+	private Set<TaskRouting> taskRoutings;
 
 	public Task() {
 		super();
@@ -53,11 +43,20 @@ public class Task {
 	public Task(long id, String status, String routingCurrent, String role, String routingClass) {
 		super();
 
-		this.id = id;
 		this.status = status;
-		this.routingCurrent = routingCurrent;
 		this.role = role;
+		// this.routingNumber = routingNumber;
+		this.id = id;
+		this.routingCurrent = routingCurrent;
 		this.routingClass = routingClass;
+	}
+
+	public Set<TaskRouting> getTaskRoutings() {
+		return taskRoutings;
+	}
+
+	public void setTaskRoutings(Set<TaskRouting> taskRoutings) {
+		this.taskRoutings = taskRoutings;
 	}
 
 	public String getStatus() {
@@ -100,4 +99,18 @@ public class Task {
 		this.routingClass = routingClass;
 	}
 
+	public long getRoutingNumber() {
+		return routingNumber;
+	}
+
+	public void setRoutingNumber(long routingNumber) {
+		this.routingNumber = routingNumber;
+	}
+
+	@Override
+	public String toString() {
+		return "Task [id=" + id + ", routingNumber=" + routingNumber + ", status=" + status + ", role=" + role
+				+ ", routingCurrent=" + routingCurrent + ", routingNext=" + routingNext + ", routingClass="
+				+ routingClass + ", taskRoutings=" + taskRoutings + "]";
+	}
 }

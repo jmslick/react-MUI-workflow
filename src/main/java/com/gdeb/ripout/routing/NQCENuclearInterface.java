@@ -7,7 +7,7 @@ package main.java.com.gdeb.ripout.routing;
 public class NQCENuclearInterface extends Routing {
 
 	public NQCENuclearInterface() {
-		super(40, STATUS_DRFT, "NQCENuclearInterface", "EBRONuclearQualityControl");
+		super(40, STATUS_NPUB, "NQCENuclearInterface", "EBRONuclearQualityControl");
 	}
 
 	public String calculate() {

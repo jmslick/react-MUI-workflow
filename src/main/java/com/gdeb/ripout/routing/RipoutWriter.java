@@ -7,7 +7,7 @@ package main.java.com.gdeb.ripout.routing;
 public class RipoutWriter extends Routing {
 
 	public RipoutWriter() {
-		super(10, STATUS_DRFT, "RipoutWriter", "EBRORipoutWriter");
+		super(10, STATUS_DRFT, ROUTING_RIPOUT_WRITER, "EBRORipoutWriter");
 	}
 
 	public String calculate() {

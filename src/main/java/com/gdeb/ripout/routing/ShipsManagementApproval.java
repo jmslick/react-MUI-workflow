@@ -7,10 +7,10 @@ package main.java.com.gdeb.ripout.routing;
 public class ShipsManagementApproval extends Routing {
 
 	public ShipsManagementApproval() {
-		super(30, STATUS_NPUB, "ShipsManagementApproval", "EBROShipManager");
+		super(30, STATUS_NPUB, ROUTING_SHIP_MGMT_APPROVAL, "EBROShipManager");
 	}
 
 	public String calculate() {
-		return ROUTING_TEST_DEPT_TEST_CONTROLS;
+		return Routing.ROUTING_QAE_SPECIAL_EMPHASIS_REVIEW;
 	}
 }

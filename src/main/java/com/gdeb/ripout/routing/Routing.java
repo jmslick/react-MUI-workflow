@@ -1,5 +1,13 @@
 package main.java.com.gdeb.ripout.routing;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import main.java.com.gdeb.ripout.app.TaskRepo;
+import main.java.com.gdeb.ripout.model.Task;
+import main.java.com.gdeb.ripout.model.TaskRouting;
+
 /**
  * @author jslick
  * 
@@ -8,34 +16,35 @@ package main.java.com.gdeb.ripout.routing;
  *         method which examines the ripout record and returns the name of the
  *         Ripout subclass to process the ensuing routing step.
  */
+
 public abstract class Routing {
 	// task table column: routing name
 	public static final String ROUTING_RIPOUT_UNDEFINED = "undefined routing";
 	public static final String ROUTING_ORIGINATOR = "Originator";
 	public static final String ROUTING_RIPOUT_WRITER = "RipoutWriter";
 	public static final String ROUTING_LEAD_TRADE = "LeadTrade";
-	public static final String ROUTING_SHIP_MGMT_APPROVAL = "Ships Management Approval";
-	public static final String ROUTING_NQCE_NUCLEAR_INTERFACE = "NQCE Nuclear Interface";
-	public static final String ROUTING_QAE_SPECIAL_EMPHASIS_REVIEW = "QAE - Special Emphasis Review";
-	public static final String ROUTING_ENGINEERING_INITIAL_REVIEW = "Engineering Initial Review";
-	public static final String ROUTING_ENGINEERING_SUPER_REVIEW = "Engineering Supervisor Review";
-	public static final String ROUTING_QAE_REENTRY_CTL_DOC_NUM = "QAE - Reentry Control Document Number";
-	public static final String ROUTING_PLANNING_D355_BLUE_TAGS = "Planning - Blue Tags";
-
-	public static final String ROUTING_TEST_DEPT_TEST_CONTROLS = "Test Dept Test Controls";
-
-	public static final String ROUTING_QAI_PIPING_REVIEW = "Qai - Piping Review";
-	public static final String ROUTING_QAI_MECH_REVIEW = "Qai - Mech Review";
-	public static final String ROUTING_QAI_STRU_REVIEW = "Qai - Stru Review";
-	public static final String ROUTING_QAI_ELEC_REVIEW = "Qai - Elec Review";
-	public static final String ROUTING_QAI_SUPERVISOR_REVIEW = "Qai - Supervisor Review";
+	public static final String ROUTING_SHIP_MGMT_APPROVAL = "ShipsManagementApproval";
+	public static final String ROUTING_NQCE_NUCLEAR_INTERFACE = "NQCENuclearInterface";
+	public static final String ROUTING_QAE_SPECIAL_EMPHASIS_REVIEW = "QAESpecialEmphasisReview";
+	public static final String ROUTING_ENGINEERING_INITIAL_REVIEW = "EngineeringInitialReview";
+	public static final String ROUTING_ENGINEERING_SUPER_REVIEW = "EngineeringSupervisorReview";
+	public static final String ROUTING_QAE_REENTRY_CTL_DOC_NUM = "QAEReentryControlDocumentNumber";
+	public static final String ROUTING_PLANNING_D355_BLUE_TAGS = "PlanningBlueTags";
+	public static final String ROUTING_TEST_DEPT_TEST_CONTROLS = "TestDeptTestControls";
+	public static final String ROUTING_QAI_PIPING_REVIEW = "QaiPipingReview";
+	public static final String ROUTING_QAI_MECH_REVIEW = "QaiMechReview";
+	public static final String ROUTING_QAI_STRU_REVIEW = "QaiStruReview";
+	public static final String ROUTING_QAI_ELEC_REVIEW = "QaiElecReview";
+	public static final String ROUTING_QAI_SUPERVISOR_REVIEW = "QaiSupervisorReview";
+	public static final String ROUTING_QAE_PRE_ISSUE_REVIEW = "QaePreIssueReview";
+	public static final String ROUTING_END = "RoutingEnd";
 
 	// task table column: role
-	public static final String ROLE_Originator = "EBROOriginator";
-	public static final String ROLE_RipoutWriter = "EBRORipoutWriter";
-	public static final String ROLE_LeadTrade = "EBROLeadTrade";
-	public static final String ROLE_ShipManager = "EBROShipManager";
-	public static final String ROLE_NuclearQualityControl = "EBRONuclearQualityControl";
+	public static final String ROLE_ORIGINATOR = "EBROOriginator";
+	public static final String ROLE_RIPOUT_WRITER = "EBRORipoutWriter";
+	public static final String ROLE_LEAD_TRADE = "EBROLeadTrade";
+	public static final String ROLE_SHIP_MANAGER = "EBROShipManager";
+	public static final String ROLE_NUCLEAR_QUALITY_CONTROL = "EBRONuclearQualityControl";
 	public static final String ROLE_QAE = "EBROQAE";
 	public static final String ROLE_ENHANCED_RO_ENGINEER = "EBROEnhancedROEngineer";
 	public static final String ROLE_ENHANCED_RO_ENGINEER_SUPERVISOR = "EBROEnhancedROEngineerSupervisor";
@@ -46,6 +55,7 @@ public abstract class Routing {
 	public static final String ROLE_QAI = "EBROQAI";
 	public static final String ROLE_QAI_SUPERVISOR_REVIEW = "EBROQAISupervisor";
 
+	public static final String STATUS_ORIG = "ORIG";
 	public static final String STATUS_DRFT = "DRFT";
 	public static final String STATUS_NPUB = "NPUB";
 	public static final String STATUS_STEC = "STEC";
@@ -54,19 +64,44 @@ public abstract class Routing {
 	public static final String STATUS_RFRT = "RFRT";
 	public static final String STATUS_RTON = "RTON";
 	public static final String STATUS_INST = "INST";
+	public static final String STATUS_END = "END";
 
 	protected int id;
-	protected String routingClass;
-	protected String role;
-
 	protected String status;
+	protected String role;
+	protected String routingCurrent;
+	protected List<TaskRouting> routings;
 
-	public Routing(int id, String status, String routingClass, String role) {
+	@Autowired
+	TaskRepo taskrepo;
+
+	public Routing(int id, String status, String routingCurrent, List<String> routings, String role) {
 		super();
 		this.id = id;
 		this.status = status;
-		this.routingClass = routingClass;
+		this.routingCurrent = routingCurrent;
 		this.role = role;
+	}
+
+	// old c'tor w/o routings list
+	public Routing(int id, String status, String routingCurrent, String role) {
+		super();
+		this.id = id;
+		this.status = status;
+		this.routingCurrent = routingCurrent;
+		this.role = role;
+		System.out.println("Routing created: " + toString());
+		// loadRoutings();
+	}
+
+	private void loadRoutings() {
+		Task task = taskrepo.findTaskByRoutingCurrent(routingCurrent);
+		System.out.println(task.toString());
+		// routings = task.getTaskRoutings();
+	}
+
+	public List<TaskRouting> getTaskRoutings() {
+		return routings;
 	}
 
 	public String calculate() {
@@ -77,8 +112,12 @@ public abstract class Routing {
 		return status;
 	}
 
+	public String getRoutingCurrent() {
+		return routingCurrent;
+	}
+
 	@Override
 	public String toString() {
-		return "Routing [id=" + id + ", routingClass=" + routingClass + ", role=" + role + "]";
+		return "Routing [id=" + id + ", routingClass=" + routingCurrent + ", role=" + role + "]";
 	}
 }

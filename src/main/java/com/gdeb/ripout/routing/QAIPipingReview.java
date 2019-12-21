@@ -4,13 +4,13 @@ package main.java.com.gdeb.ripout.routing;
  * @author jslick
  *
  */
-public class QAIPipingReview extends Routing {
+public class QaiPipingReview extends Routing {
 
-	public QAIPipingReview() {
+	public QaiPipingReview() {
 		super(100, STATUS_NPUB, "QAIPipingReview", "EBROQAI");
 	}
 
 	public String calculate() {
-		return ROUTING_QAE_SPECIAL_EMPHASIS_REVIEW;
+		return Routing.ROUTING_QAI_MECH_REVIEW;
 	}
 }

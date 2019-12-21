@@ -7,7 +7,7 @@ package main.java.com.gdeb.ripout.routing;
 public class QAESpecialEmphasisReview extends Routing {
 
 	public QAESpecialEmphasisReview() {
-		super(50, STATUS_NPUB, "QAESpecialEmphasisReview", "EBROQAE");
+		super(50, STATUS_NPUB, ROUTING_QAE_SPECIAL_EMPHASIS_REVIEW, "EBROQAE");
 	}
 
 	public String calculate() {

@@ -7,11 +7,11 @@ package main.java.com.gdeb.ripout.routing;
 public class TestDeptTestControls extends Routing {
 
 	public TestDeptTestControls() {
-		super(160, STATUS_STEC, "WRITER", "EBROTestDepartment");
+		super(160, STATUS_STEC, ROUTING_TEST_DEPT_TEST_CONTROLS, "EBROTestDepartment");
 	}
 
 	public String calculate() {
-		return ROUTING_SHIP_MGMT_APPROVAL;
+		return ROUTING_END;
 	}
 
 }
