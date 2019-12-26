@@ -117,6 +117,10 @@ public class Ripout {
 		this.nuclear = nuclear;
 	}
 
+	public String getNuclear() {
+		return nuclear == true ? "Yes" : "No";
+	}
+
 	public String getRipoutNo() {
 		return ripoutNo;
 	}

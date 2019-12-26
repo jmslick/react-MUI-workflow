@@ -21,28 +21,32 @@ class LoadDatabase {
 
 		return args -> {
 			log.info("Preloading " + repository
-					.save(new Ripout("001", true, "RO82110 001", "J. Siczpak", "387128", "w1234", "HVAC", "PSA",
+					.save(new Ripout("1001", true, "RO82110 001", "J. Siczpak", "387128", "w1234", "HVAC", "PSA",
 							"Type-1", "HVAC-MAINT", "714", "32", Routing.STATUS_ORIG, Routing.ROUTING_ORIGINATOR)));
 
 			log.info("Preloading " + repository
-					.save(new Ripout("002", false, "RO54562 001", "H. Walker", "789567", "w5678", "DSS", "New",
+					.save(new Ripout("1002", false, "RO54562 001", "H. Walker", "789567", "w5678", "DSS", "New",
 							"Type-Z01", "Dive System", "729", "20", Routing.STATUS_ORIG, Routing.ROUTING_ORIGINATOR)));
 
 			log.info("Preloading " + repository
-					.save(new Ripout("003", true, "RO87645 001", "J. Siczpak", "387128", "w1234", "HVAC", "PSA",
+					.save(new Ripout("1003", true, "RO87645 001", "J. Siczpak", "387128", "w1234", "HVAC", "PSA",
 							"Type-1", "HVAC-MAINT", "714", "32", Routing.STATUS_DRFT, Routing.ROUTING_RIPOUT_WRITER)));
 
 			log.info("Preloading " + repository.save(
-					new Ripout("004", true, "RO26578 001", "J. Siczpak", "387128", "w8434", "PROP", "New", "Type-K584",
+					new Ripout("1004", true, "RO26578 001", "J. Siczpak", "387128", "w8434", "PROP", "New", "Type-K584",
 							"Prop-X821-A34", "714", "45", Routing.STATUS_NPUB, Routing.ROUTING_RIPOUT_WRITER)));
 
-			log.info("Preloading " + repository.save(new Ripout("005", false, "RO75634 001", "H. Walker", "789567",
+			log.info("Preloading " + repository.save(new Ripout("1005", false, "RO75634 001", "H. Walker", "789567",
 					"w7831", "IAQ-5341", "PSA", "Type-4418", "Threat Mgmnt", "714", "457", Routing.STATUS_NPUB,
 					Routing.ROUTING_RIPOUT_WRITER)));
 
-			log.info("Preloading " + repository.save(new Ripout("006", false, "RO87634 001", "J. Siczpak", "387128",
-					"w4891", "472-1JK", "PSA", "Type-45GJ-01", "Nav Systme", "734", "456", Routing.STATUS_NPUB,
-					Routing.ROUTING_LEAD_TRADE)));
+			log.info("Preloading " + repository.save(new Ripout("1006", false, "RO78789 001", "J. Siczpak", "387128",
+					"xabc123", "472-1JK", "PSA", "KJF09CVCUIAOT43", "Weapons Maint", "734", "219",
+					Routing.ROLE_TEST_DEPT_TEST_CONTROLS, Routing.ROUTING_ENGINEERING_SUPER_REVIEW)));
+
+			log.info("Preloading " + repository.save(new Ripout("1007", false, "RO78945 001", "W. Walden", "789456",
+					"a7984", "AB-315", "NEW", "Type-T483QJ-7489", "Telemetry", "734", "456", Routing.STATUS_NPUB,
+					Routing.ROUTING_QAI_STRU_REVIEW)));
 
 		};
 	}
