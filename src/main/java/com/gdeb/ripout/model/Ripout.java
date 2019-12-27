@@ -55,7 +55,8 @@ public class Ripout {
 		this.nuclear = nuclear;
 		this.badge = badge;
 		this.userid = userid;
-		this.status = Routing.ROLE_ORIGINATOR;
+		this.originator = userid;
+		this.status = Routing.STATUS_ORIG;
 		this.routing = Routing.ROLE_ORIGINATOR;
 
 		LocalDateTime now = LocalDateTime.now();

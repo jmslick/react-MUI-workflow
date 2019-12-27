@@ -42,7 +42,7 @@ class LoadDatabase {
 
 			log.info("Preloading " + repository.save(new Ripout("1006", false, "RO78789 001", "J. Siczpak", "387128",
 					"xabc123", "472-1JK", "PSA", "KJF09CVCUIAOT43", "Weapons Maint", "734", "219",
-					Routing.ROLE_TEST_DEPT_TEST_CONTROLS, Routing.ROUTING_ENGINEERING_SUPER_REVIEW)));
+					Routing.ROLE_TEST_DEPT_TEST_CONTROLS, Routing.ROUTING_NQCE_NUCLEAR_INTERFACE)));
 
 			log.info("Preloading " + repository.save(new Ripout("1007", false, "RO78945 001", "W. Walden", "789456",
 					"a7984", "AB-315", "NEW", "Type-T483QJ-7489", "Telemetry", "734", "456", Routing.STATUS_NPUB,
