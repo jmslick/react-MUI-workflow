@@ -2,9 +2,12 @@ bin/**
 #.classpath
 #.project
 #.settings/*
-/target/**
 .settings/**
 /bak/*
 /bin/
-/target/
 /node*
+/target/generated*
+/target/classes/*
+/target/maven*
+/target/node/*
+/target/*.original
