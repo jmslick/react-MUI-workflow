@@ -270,6 +270,10 @@ public class Ripout {
 		return xref;
 	}
 
+	public String signingMessage() {
+		return "Ripout [xref=" + xref + ", " + (xrefSeq != null ? "xrefSeq=" + xrefSeq + ", " : "") + "]";
+	}
+
 	@Override
 	public String toString() {
 		return "Ripout [xref=" + xref + ", " + (xrefSeq != null ? "xrefSeq=" + xrefSeq + ", " : "") + "nuclear="
@@ -290,5 +294,4 @@ public class Ripout {
 				+ (tradeBoundary != null ? "tradeBoundary=" + tradeBoundary + ", " : "")
 				+ (routing != null ? "routing=" + routing : "") + "]";
 	}
-
 }

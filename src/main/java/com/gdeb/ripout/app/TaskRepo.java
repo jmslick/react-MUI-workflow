@@ -10,4 +10,10 @@ import main.java.com.gdeb.ripout.model.Task;
 public interface TaskRepo extends CrudRepository<Task, Long> {
 	@Query("from Task t where t.routingCurrent = :routingCurrent")
 	Task findTaskByRoutingCurrent(@Param("routingCurrent") String routingCurrent);
+
+	@Query("from Task t where t.xref = :xref and t.xrefSeq = :xrefSeq")
+	Task findByXrefAndXrefSeq(@Param("xref") long xref, @Param("xrefSeq") long xrefSeq);
+
+	@Query("from Task t where t.xref = :xref")
+	Task findByXref(@Param("xref") long xref);
 }

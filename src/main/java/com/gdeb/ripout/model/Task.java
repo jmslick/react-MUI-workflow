@@ -1,10 +1,7 @@
 package main.java.com.gdeb.ripout.model;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -12,6 +9,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 /**
  * @author admin
  *
+ *         Rev 2 of a task, aka open routing.
+ * 
  */
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@id")
@@ -21,15 +20,13 @@ public class Task {
 	// @GeneratedValue
 	private long id;
 
-	private String status;
-	private String role;
-	private long routingNumber;
-	private String routingCurrent;
-	private String routingNext;
-	private String routingClass;
+	private long xref;
+	private long xrefSeq;
 
-	@OneToMany(mappedBy = "task")
-	private Set<TaskRouting> taskRoutings;
+	private String status;
+	private String routingCurrent;
+	private String routingPredecessor;
+	private String routingSuccessor;
 
 	public Task() {
 		super();
@@ -40,23 +37,31 @@ public class Task {
 		this.id = id;
 	}
 
-	public Task(long id, String status, String routingCurrent, String role, String routingClass) {
+	public Task(long xref, long xrefSeq, String routingCurrent, String routingSuccessor) {
 		super();
 
+		this.xref = xref;
+		this.xrefSeq = xrefSeq;
 		this.status = status;
-		this.role = role;
-		// this.routingNumber = routingNumber;
-		this.id = id;
 		this.routingCurrent = routingCurrent;
-		this.routingClass = routingClass;
+		this.routingSuccessor = routingSuccessor;
+		toString();
 	}
 
-	public Set<TaskRouting> getTaskRoutings() {
-		return taskRoutings;
+	public long getXref() {
+		return xref;
 	}
 
-	public void setTaskRoutings(Set<TaskRouting> taskRoutings) {
-		this.taskRoutings = taskRoutings;
+	public void setXref(long xref) {
+		this.xref = xref;
+	}
+
+	public long getXrefSeq() {
+		return xrefSeq;
+	}
+
+	public void setXrefSeq(long xrefSeq) {
+		this.xrefSeq = xrefSeq;
 	}
 
 	public String getStatus() {
@@ -67,14 +72,6 @@ public class Task {
 		this.status = status;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 	public String getRoutingCurrent() {
 		return routingCurrent;
 	}
@@ -83,34 +80,32 @@ public class Task {
 		this.routingCurrent = routingCurrent;
 	}
 
-	public String getRoutingNext() {
-		return routingNext;
+	public String getRoutingPredecessor() {
+		return routingPredecessor;
 	}
 
-	public void setRoutingNext(String routingNext) {
-		this.routingNext = routingNext;
+	public void setRoutingPredecessor(String routingPredecessor) {
+		this.routingPredecessor = routingPredecessor;
 	}
 
-	public String getRoutingClass() {
-		return routingClass;
+	public String getRoutingSuccessorClass() {
+		return routingSuccessor;
 	}
 
-	public void setRoutingClass(String routingClass) {
-		this.routingClass = routingClass;
+	public void setRoutingSuccessor(String routingSuccessor) {
+		this.routingSuccessor = routingSuccessor;
 	}
 
-	public long getRoutingNumber() {
-		return routingNumber;
-	}
-
-	public void setRoutingNumber(long routingNumber) {
-		this.routingNumber = routingNumber;
+	public String getRoutingSuccessor() {
+		return routingSuccessor;
 	}
 
 	@Override
 	public String toString() {
-		return "Task [id=" + id + ", routingNumber=" + routingNumber + ", status=" + status + ", role=" + role
-				+ ", routingCurrent=" + routingCurrent + ", routingNext=" + routingNext + ", routingClass="
-				+ routingClass + ", taskRoutings=" + taskRoutings + "]";
+		return "Task [id=" + id + ", xref=" + xref + ", xrefSeq=" + xrefSeq + ", "
+				+ (status != null ? "status=" + status + ", " : "")
+				+ (routingCurrent != null ? "routingCurrent=" + routingCurrent + ", " : "")
+				+ (routingPredecessor != null ? "routingPredecessor=" + routingPredecessor + ", " : "")
+				+ (routingSuccessor != null ? "routingSuccessor=" + routingSuccessor : "") + "]";
 	}
 }

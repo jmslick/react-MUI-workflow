@@ -6,8 +6,6 @@ bin/**
 /bak/*
 /bin/
 /node*
-/target/generated*
-/target/classes/*
-/target/maven*
-/target/node/*
-/target/*.original
+/target/**
+/target/*.jar
+/target/ripout-0.0.1-SNAPSHOT.jar

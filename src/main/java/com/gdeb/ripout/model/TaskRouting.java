@@ -23,7 +23,7 @@ public class TaskRouting {
 
 	@ManyToOne
 	@JoinColumn(name = "task")
-	private Task task;
+	private TaskOri task;
 
 	private Long routingNumber;
 
@@ -33,13 +33,13 @@ public class TaskRouting {
 		super();
 	}
 
-	public TaskRouting(String routing, Task task) {
+	public TaskRouting(String routing, TaskOri task) {
 		super();
 		this.routing = routing;
 		this.task = task;
 	}
 
-	public TaskRouting(String routing, long routingNumber, Task task) {
+	public TaskRouting(String routing, long routingNumber, TaskOri task) {
 		super();
 		this.routing = routing;
 		this.routingNumber = new Long(routingNumber);
@@ -54,11 +54,11 @@ public class TaskRouting {
 		this.routing = routing;
 	}
 
-	public Task getTask() {
+	public TaskOri getTask() {
 		return task;
 	}
 
-	public void setTask(Task task) {
+	public void setTask(TaskOri task) {
 		this.task = task;
 	}
 

@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import main.java.com.gdeb.ripout.app.TaskRepo;
-import main.java.com.gdeb.ripout.model.Task;
+import main.java.com.gdeb.ripout.app.TaskOriRepo;
+import main.java.com.gdeb.ripout.model.TaskOri;
 import main.java.com.gdeb.ripout.model.TaskRouting;
 
 /**
@@ -18,7 +18,7 @@ import main.java.com.gdeb.ripout.model.TaskRouting;
  */
 
 public abstract class Routing {
-	// task table column: routing name
+	// task table column: routing map of java classes
 	public static final String ROUTING_RIPOUT_UNDEFINED = "undefined routing";
 	public static final String ROUTING_ORIGINATOR = "Originator";
 	public static final String ROUTING_RIPOUT_WRITER = "RipoutWriter";
@@ -73,7 +73,7 @@ public abstract class Routing {
 	protected List<TaskRouting> routings;
 
 	@Autowired
-	TaskRepo taskrepo;
+	TaskOriRepo taskrepo;
 
 	public Routing(int id, String status, String routingCurrent, List<String> routings, String role) {
 		super();
@@ -90,12 +90,12 @@ public abstract class Routing {
 		this.status = status;
 		this.routingCurrent = routingCurrent;
 		this.role = role;
-		System.out.println("Routing created: " + toString());
+		// System.out.println("Routing created: " + toString());
 		// loadRoutings();
 	}
 
 	private void loadRoutings() {
-		Task task = taskrepo.findTaskByRoutingCurrent(routingCurrent);
+		TaskOri task = taskrepo.findTaskOriByRoutingCurrent(routingCurrent);
 		System.out.println(task.toString());
 		// routings = task.getTaskRoutings();
 	}
@@ -118,6 +118,6 @@ public abstract class Routing {
 
 	@Override
 	public String toString() {
-		return "Routing [id=" + id + ", routingClass=" + routingCurrent + ", role=" + role + "]";
+		return getClass().getName() + "[id=" + id + ", routingClass=" + routingCurrent + ", role=" + role + "]";
 	}
 }

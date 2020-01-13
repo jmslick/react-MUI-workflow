@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import main.java.RipoutApplication;
 import main.java.com.gdeb.ripout.app.RipoutRepository;
+import main.java.com.gdeb.ripout.app.TaskOriRepo;
 import main.java.com.gdeb.ripout.app.TaskRepo;
 import main.java.com.gdeb.ripout.model.Ripout;
+import main.java.com.gdeb.ripout.model.Task;
 import main.java.com.gdeb.ripout.routing.Routing;
 
 /**
@@ -30,11 +32,15 @@ public class Workflow {
 	TaskRepo taskRepository;
 
 	@Autowired
+	TaskOriRepo taskOriRepository;
+
+	@Autowired
 	RipoutRepository repository;
 
-	Workflow(RipoutRepository repository, TaskRepo taskRepository) {
-		this.taskRepository = taskRepository;
+	Workflow(RipoutRepository repository, TaskOriRepo taskOriRepository, TaskRepo taskRepository) {
 		log.debug("Workflow ctor");
+		this.taskRepository = taskRepository;
+		this.taskOriRepository = taskOriRepository;
 	}
 
 	public void start() {
@@ -45,11 +51,23 @@ public class Workflow {
 		log.info("Ripout started: " + list.get(list.size() - 1));
 	}
 
-	public static void signWorkflowStep(Ripout ripout) {
-		System.out.println("Signing " + ripout.toString());
-		loadRoutingClass(ripout.getRouting());
-		ripout.setStatus(routing.getStatus());
-		ripout.setRouting(routing.calculate());
+	public void signWorkflowStep(Ripout ripout) {
+		System.out.println("--------------------");
+
+		Task task = taskRepository.findByXref(ripout.getXref());
+		System.out.println("Signing " + task.getRoutingCurrent() + ": " + ripout.signingMessage());
+
+		loadRoutingClass(task.getRoutingCurrent()); // current routing
+		task.setRoutingPredecessor(routing.getRoutingCurrent());
+
+		loadRoutingClass(routing.calculate()); // next routing
+		task.setRoutingCurrent(routing.getRoutingCurrent());
+
+		taskRepository.save(task);
+
+		System.out.println("Prev: " + task.getRoutingPredecessor());
+		System.out.println("Now: " + task.getRoutingCurrent());
+		System.out.println("Next: " + routing.calculate());
 	}
 
 	public static void signWorkflowStep(long id) {
@@ -64,7 +82,7 @@ public class Workflow {
 		try {
 			Class clazz = Class.forName(pkg + routingName);
 			routing = (Routing) clazz.newInstance();
-			System.out.println("Loaded routing class: " + routing.toString());
+			// System.out.println("Loaded routing class: " + routing.toString());
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
