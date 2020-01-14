@@ -88,23 +88,53 @@ class RipoutController {
 	 * @param id
 	 * @return
 	 */
-	@PutMapping("/ripout/progress/{id}")
-	Ripout _progress(@PathVariable Long id) {
+	@PutMapping("/ripout/progress/{xref}")
+	Ripout progress(@PathVariable Long xref) {
+		// Ripout ripout = ripoutRepository.findById(id).orElseThrow(() -> new
+		// RipoutNotFoundException(id));
+		Ripout ripout = ripoutRepository.findByXref(xref);
+		this.workflow.sign(ripout);
+		ripoutRepository.save(ripout);
+		return ripoutRepository.findByXref(xref);
+	}
+
+	/**
+	 * stop work http://localhost:8080/ripout/stop/{id}
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@PutMapping("/ripout/stop/{id}")
+	Ripout stopWork(@PathVariable Long id) {
 		Ripout ripout = ripoutRepository.findById(id).orElseThrow(() -> new RipoutNotFoundException(id));
-		this.workflow.signWorkflowStep(ripout);
+		this.workflow.stop(ripout);
+		ripoutRepository.save(ripout);
+		return ripoutRepository.findById(id).orElseThrow(() -> new RipoutNotFoundException(id));
+	}
+
+	/**
+	 * resume work http://localhost:8080/ripout/resume/{id}
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@PutMapping("/ripout/resume/{id}")
+	Ripout resumeWork(@PathVariable Long id) {
+		Ripout ripout = ripoutRepository.findById(id).orElseThrow(() -> new RipoutNotFoundException(id));
+		this.workflow.resume(ripout);
 		ripoutRepository.save(ripout);
 		return ripoutRepository.findById(id).orElseThrow(() -> new RipoutNotFoundException(id));
 	}
 
 	// progress and return the progressed ripout record
-	@PutMapping("/ripout/_progress/{id}")
-	Ripout progress(@PathVariable Long id) {
-		// Ripout ripout = repository.findById(id).orElseThrow(() -> new
-		// RipoutNotFoundException(id));
-		Workflow.signWorkflowStep(id);
-		// repository.save(ripout);
-		return ripoutRepository.findById(id).orElseThrow(() -> new RipoutNotFoundException(id));
-	}
+//	@PutMapping("/ripout/_progress/{id}")
+//	Ripout progress(@PathVariable Long id) {
+//		// Ripout ripout = repository.findById(id).orElseThrow(() -> new
+//		// RipoutNotFoundException(id));
+//		Workflow.signWorkflowStep(id);
+//		// repository.save(ripout);
+//		return ripoutRepository.findById(id).orElseThrow(() -> new RipoutNotFoundException(id));
+//	}
 
 	/*
 	 * @PutMapping("/ripout/{id}") Ripout replaceRipout(@RequestBody Ripout

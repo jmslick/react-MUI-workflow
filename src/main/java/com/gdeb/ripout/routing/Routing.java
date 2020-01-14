@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import main.java.com.gdeb.ripout.app.RipoutRepository;
 import main.java.com.gdeb.ripout.app.TaskOriRepo;
+import main.java.com.gdeb.ripout.model.Ripout;
 import main.java.com.gdeb.ripout.model.TaskOri;
 import main.java.com.gdeb.ripout.model.TaskRouting;
 
@@ -24,6 +26,9 @@ public abstract class Routing {
 	public static final String ROUTING_RIPOUT_WRITER = "RipoutWriter";
 	public static final String ROUTING_LEAD_TRADE = "LeadTrade";
 	public static final String ROUTING_SHIP_MGMT_APPROVAL = "ShipsManagementApproval";
+	public static final String ROUTING_SHIPS_FORCE = "ShipsForce";
+	public static final String ROUTING_SHIPS_MANAGEMENT = "ShipsManagement";
+
 	public static final String ROUTING_NQCE_NUCLEAR_INTERFACE = "NQCENuclearInterface";
 	public static final String ROUTING_QAE_SPECIAL_EMPHASIS_REVIEW = "QAESpecialEmphasisReview";
 	public static final String ROUTING_ENGINEERING_INITIAL_REVIEW = "EngineeringInitialReview";
@@ -37,6 +42,16 @@ public abstract class Routing {
 	public static final String ROUTING_QAI_ELEC_REVIEW = "QaiElecReview";
 	public static final String ROUTING_QAI_SUPERVISOR_REVIEW = "QaiSupervisorReview";
 	public static final String ROUTING_QAE_PRE_ISSUE_REVIEW = "QaePreIssueReview";
+
+	public static final String ROUTING_SAFETY_TECH_MECH = "SafetyTechMechanical";
+	public static final String ROUTING_SAFETY_TECH_ELEC = "SafetyTechElectrical";
+	public static final String ROUTING_SAFETY_TECH_ELTX = "SafetyTechElectronics";
+
+	public static final String ROUTING_STOP_WORK = "StopWork";
+	public static final String ROUTING_STOP_WORK_SHIPS_FORCE = "StopWorkShipsForce";
+	public static final String ROUTING_STOP_WORK_SHIPS_MANAGEMENT = "StopWorkShipsManagement";
+	public static final String ROUTING_STOP_WORK_LEAD_TRADE = "StopWorkLeadTrade";
+
 	public static final String ROUTING_END = "RoutingEnd";
 
 	// task table column: role
@@ -44,12 +59,16 @@ public abstract class Routing {
 	public static final String ROLE_RIPOUT_WRITER = "EBRORipoutWriter";
 	public static final String ROLE_LEAD_TRADE = "EBROLeadTrade";
 	public static final String ROLE_SHIP_MANAGER = "EBROShipManager";
+	public static final String ROLE_SHIPS_FORCE = "EBROShipsForce";
 	public static final String ROLE_NUCLEAR_QUALITY_CONTROL = "EBRONuclearQualityControl";
 	public static final String ROLE_QAE = "EBROQAE";
 	public static final String ROLE_ENHANCED_RO_ENGINEER = "EBROEnhancedROEngineer";
 	public static final String ROLE_ENHANCED_RO_ENGINEER_SUPERVISOR = "EBROEnhancedROEngineerSupervisor";
 	public static final String ROLE_PLANNING = "EBROPlanning";
 	public static final String ROLE_TEST_DEPT_TEST_CONTROLS = "EBROTestDepartment";
+	public static final String ROLE_SAFETY_TECH_MECH = "EBROSafetyTechMechanical";
+	public static final String ROLE_SAFETY_TECH_ELEC = "EBROSafetyTechElectrical";
+	public static final String ROLE_SAFETY_TECH_ELTX = "EBROSafetyTechElectronics";
 
 	public static final String ROLE_EBRONuclearQualityControl = "EBRONuclearQualityControl";
 	public static final String ROLE_QAI = "EBROQAI";
@@ -64,6 +83,7 @@ public abstract class Routing {
 	public static final String STATUS_RFRT = "RFRT";
 	public static final String STATUS_RTON = "RTON";
 	public static final String STATUS_INST = "INST";
+	public static final String STATUS_STOP = "STOP";
 	public static final String STATUS_END = "END";
 
 	protected int id;
@@ -72,8 +92,12 @@ public abstract class Routing {
 	protected String routingCurrent;
 	protected List<TaskRouting> routings;
 
+	protected Ripout ripout;
+
 	@Autowired
 	TaskOriRepo taskrepo;
+
+	RipoutRepository ripoutRepository;
 
 	public Routing(int id, String status, String routingCurrent, List<String> routings, String role) {
 		super();
@@ -92,6 +116,14 @@ public abstract class Routing {
 		this.role = role;
 		// System.out.println("Routing created: " + toString());
 		// loadRoutings();
+	}
+
+	public void setRipout(Ripout ripout) {
+		this.ripout = ripout;
+	}
+
+	public void setRipoutRepository(RipoutRepository ripoutRepository) {
+		this.ripoutRepository = ripoutRepository;
 	}
 
 	private void loadRoutings() {
