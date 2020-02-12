@@ -11,8 +11,7 @@ import main.java.com.gdeb.ripout.model.TaskRouting;
 import main.java.com.gdeb.ripout.routing.Routing;
 
 @Configuration
-//@Slf4j
-//@Log
+
 class LoadDatabase {
 	private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(LoadDatabase.class);
 
